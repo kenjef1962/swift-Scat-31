@@ -8,12 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		701723661CB49341007042B9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701723651CB49341007042B9 /* AppDelegate.swift */; };
-		701723681CB49341007042B9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701723671CB49341007042B9 /* ViewController.swift */; };
+		701723681CB49341007042B9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701723671CB49341007042B9 /* MainViewController.swift */; };
 		7017236B1CB49341007042B9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 701723691CB49341007042B9 /* Main.storyboard */; };
 		7017236D1CB49341007042B9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7017236C1CB49341007042B9 /* Assets.xcassets */; };
 		701723701CB49341007042B9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7017236E1CB49341007042B9 /* LaunchScreen.storyboard */; };
 		7017237B1CB49341007042B9 /* Scat_31Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7017237A1CB49341007042B9 /* Scat_31Tests.swift */; };
 		701723861CB49341007042B9 /* Scat_31UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701723851CB49341007042B9 /* Scat_31UITests.swift */; };
+		701723941CB49374007042B9 /* UIView+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701723931CB49374007042B9 /* UIView+extensions.swift */; };
+		701723961CB49384007042B9 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701723951CB49384007042B9 /* GameEngine.swift */; };
+		701723981CB4A0B4007042B9 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701723971CB4A0B4007042B9 /* Card.swift */; };
+		7017239A1CB4A0C4007042B9 /* CardStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701723991CB4A0C4007042B9 /* CardStack.swift */; };
+		7017239C1CB4A48E007042B9 /* GlobalStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7017239B1CB4A48E007042B9 /* GlobalStrings.swift */; };
+		701723A21CB62FAF007042B9 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701723A11CB62FAF007042B9 /* Player.swift */; };
+		701723A41CB62FE7007042B9 /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701723A31CB62FE7007042B9 /* Deck.swift */; };
+		701723A61CB62FF3007042B9 /* Discards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701723A51CB62FF3007042B9 /* Discards.swift */; };
+		701723A81CBB4A40007042B9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701723A71CBB4A40007042B9 /* SettingsViewController.swift */; };
+		701723B21CBB4B26007042B9 /* UIAlertController+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701723B11CBB4B26007042B9 /* UIAlertController+extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +46,7 @@
 /* Begin PBXFileReference section */
 		701723621CB49341007042B9 /* Scat 31.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Scat 31.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		701723651CB49341007042B9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		701723671CB49341007042B9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		701723671CB49341007042B9 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		7017236A1CB49341007042B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7017236C1CB49341007042B9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7017236F1CB49341007042B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +57,16 @@
 		701723811CB49341007042B9 /* Scat 31UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Scat 31UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		701723851CB49341007042B9 /* Scat_31UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scat_31UITests.swift; sourceTree = "<group>"; };
 		701723871CB49341007042B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		701723931CB49374007042B9 /* UIView+extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+extensions.swift"; sourceTree = "<group>"; };
+		701723951CB49384007042B9 /* GameEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
+		701723971CB4A0B4007042B9 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		701723991CB4A0C4007042B9 /* CardStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardStack.swift; sourceTree = "<group>"; };
+		7017239B1CB4A48E007042B9 /* GlobalStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalStrings.swift; sourceTree = "<group>"; };
+		701723A11CB62FAF007042B9 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		701723A31CB62FE7007042B9 /* Deck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
+		701723A51CB62FF3007042B9 /* Discards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Discards.swift; sourceTree = "<group>"; };
+		701723A71CBB4A40007042B9 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		701723B11CBB4B26007042B9 /* UIAlertController+extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,11 +118,12 @@
 			isa = PBXGroup;
 			children = (
 				701723651CB49341007042B9 /* AppDelegate.swift */,
-				701723671CB49341007042B9 /* ViewController.swift */,
-				701723691CB49341007042B9 /* Main.storyboard */,
-				7017236C1CB49341007042B9 /* Assets.xcassets */,
-				7017236E1CB49341007042B9 /* LaunchScreen.storyboard */,
-				701723711CB49341007042B9 /* Info.plist */,
+				701723AE1CBB4ABD007042B9 /* Business Logic */,
+				701723AC1CBB4A90007042B9 /* Models */,
+				701723A91CBB4A51007042B9 /* View Controllers */,
+				701723AB1CBB4A74007042B9 /* Story Boards */,
+				701723AD1CBB4AAD007042B9 /* Extensions */,
+				701723AF1CBB4AE1007042B9 /* Resources */,
 			);
 			path = "Scat 31";
 			sourceTree = "<group>";
@@ -123,6 +144,63 @@
 				701723871CB49341007042B9 /* Info.plist */,
 			);
 			path = "Scat 31UITests";
+			sourceTree = "<group>";
+		};
+		701723A91CBB4A51007042B9 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				701723671CB49341007042B9 /* MainViewController.swift */,
+				701723A71CBB4A40007042B9 /* SettingsViewController.swift */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		701723AB1CBB4A74007042B9 /* Story Boards */ = {
+			isa = PBXGroup;
+			children = (
+				701723691CB49341007042B9 /* Main.storyboard */,
+				7017236E1CB49341007042B9 /* LaunchScreen.storyboard */,
+			);
+			name = "Story Boards";
+			sourceTree = "<group>";
+		};
+		701723AC1CBB4A90007042B9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				701723A11CB62FAF007042B9 /* Player.swift */,
+				701723971CB4A0B4007042B9 /* Card.swift */,
+				701723991CB4A0C4007042B9 /* CardStack.swift */,
+				701723A31CB62FE7007042B9 /* Deck.swift */,
+				701723A51CB62FF3007042B9 /* Discards.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		701723AD1CBB4AAD007042B9 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				701723931CB49374007042B9 /* UIView+extensions.swift */,
+				701723B11CBB4B26007042B9 /* UIAlertController+extensions.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		701723AE1CBB4ABD007042B9 /* Business Logic */ = {
+			isa = PBXGroup;
+			children = (
+				701723951CB49384007042B9 /* GameEngine.swift */,
+			);
+			name = "Business Logic";
+			sourceTree = "<group>";
+		};
+		701723AF1CBB4AE1007042B9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7017236C1CB49341007042B9 /* Assets.xcassets */,
+				7017239B1CB4A48E007042B9 /* GlobalStrings.swift */,
+				701723711CB49341007042B9 /* Info.plist */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -188,21 +266,24 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Kendall Jefferson";
 				TargetAttributes = {
 					701723611CB49340007042B9 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = JTPDJ9JCYN;
+						LastSwiftMigration = 0800;
 					};
 					701723751CB49341007042B9 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = JTPDJ9JCYN;
+						LastSwiftMigration = 0800;
 						TestTargetID = 701723611CB49340007042B9;
 					};
 					701723801CB49341007042B9 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = JTPDJ9JCYN;
+						LastSwiftMigration = 0800;
 						TestTargetID = 701723611CB49340007042B9;
 					};
 				};
@@ -259,8 +340,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				701723681CB49341007042B9 /* ViewController.swift in Sources */,
+				701723A41CB62FE7007042B9 /* Deck.swift in Sources */,
+				7017239A1CB4A0C4007042B9 /* CardStack.swift in Sources */,
+				701723A81CBB4A40007042B9 /* SettingsViewController.swift in Sources */,
+				701723681CB49341007042B9 /* MainViewController.swift in Sources */,
+				7017239C1CB4A48E007042B9 /* GlobalStrings.swift in Sources */,
 				701723661CB49341007042B9 /* AppDelegate.swift in Sources */,
+				701723B21CBB4B26007042B9 /* UIAlertController+extensions.swift in Sources */,
+				701723A21CB62FAF007042B9 /* Player.swift in Sources */,
+				701723A61CB62FF3007042B9 /* Discards.swift in Sources */,
+				701723981CB4A0B4007042B9 /* Card.swift in Sources */,
+				701723941CB49374007042B9 /* UIView+extensions.swift in Sources */,
+				701723961CB49384007042B9 /* GameEngine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,8 +420,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -352,7 +445,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -375,8 +468,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -392,9 +487,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -408,6 +504,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "KenJef.Scat-31";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -419,6 +516,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "KenJef.Scat-31";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -430,6 +528,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "KenJef.Scat-31Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Scat 31.app/Scat 31";
 			};
 			name = Debug;
@@ -442,6 +541,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "KenJef.Scat-31Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Scat 31.app/Scat 31";
 			};
 			name = Release;
@@ -453,6 +553,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "KenJef.Scat-31UITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "Scat 31";
 			};
 			name = Debug;
@@ -464,6 +565,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "KenJef.Scat-31UITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "Scat 31";
 			};
 			name = Release;
@@ -487,6 +589,7 @@
 				7017238C1CB49341007042B9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7017238D1CB49341007042B9 /* Build configuration list for PBXNativeTarget "Scat 31Tests" */ = {
 			isa = XCConfigurationList;
@@ -495,6 +598,7 @@
 				7017238F1CB49341007042B9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		701723901CB49341007042B9 /* Build configuration list for PBXNativeTarget "Scat 31UITests" */ = {
 			isa = XCConfigurationList;
@@ -503,6 +607,7 @@
 				701723921CB49341007042B9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
