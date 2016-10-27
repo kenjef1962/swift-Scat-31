@@ -7,15 +7,16 @@
 //
 
 import Foundation
+
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
+    switch (lhs, rhs) {
+    case let (l?, r?):
+        return l < r
+    case (nil, _?):
+        return true
+    default:
+        return false
+    }
 }
 
 
@@ -51,12 +52,13 @@ class GameEngine {
     // MARK: Public Properties
     var delegate: GameEngineDelegate?
     
-    var currentDeal = Player.player
+    var currentDealer = Player.player
     var currentTurn = Player.computer
     var currentKnock: Player?
     
     var computerKnockThreshold = 0.0
     
+    // MARK: Public Computed Properties
     var winsComputer: Int { get { return wins[.computer] ?? 0 } }
     var winsPlayer: Int { get { return wins[.player] ?? 0 } }
     
@@ -76,8 +78,8 @@ extension GameEngine {
     func startNewGame() {
         gameIsOver = false
         
-        currentDeal = lastWinningPlayer ?? .computer
-        currentTurn = currentDeal == .computer ? .player : .computer
+        currentDealer = lastWinningPlayer ?? .computer
+        currentTurn = currentDealer == .computer ? .player : .computer
         currentKnock = nil
         lastWinningPlayer = nil
         
@@ -105,17 +107,19 @@ extension GameEngine {
         
         for _ in 1...3 {
             guard let card1 = deck.drawCard() else {
-                delegate?.unexpectedError(GlobalErrors.unableToDrawCard); return
+                delegate?.unexpectedError(GlobalErrors.unableToDrawCard)
+                return
             }
             guard let card2 = deck.drawCard() else {
-                delegate?.unexpectedError(GlobalErrors.unableToDrawCard); return
+                delegate?.unexpectedError(GlobalErrors.unableToDrawCard)
+                return
             }
             
-            hands[.computer]?.append((currentDeal == .player) ? card1 : card2)
-            hands[.player]?.append((currentDeal == .computer) ? card1 : card2)
+            hands[.computer]?.append((currentDealer == .player) ? card1 : card2)
+            hands[.player]?.append((currentDealer == .computer) ? card1 : card2)
         }
         
-        delegate?.dealComplete(currentDeal)
+        delegate?.dealComplete(currentDealer)
     }
     
     func drawCard() {
@@ -127,7 +131,8 @@ extension GameEngine {
             return
         }
         guard let card = deck.drawCard() else {
-            delegate?.unexpectedError(GlobalErrors.unableToDrawCard); return
+            delegate?.unexpectedError(GlobalErrors.unableToDrawCard)
+            return
         }
         
         hands[player]?.append(card)
@@ -144,7 +149,8 @@ extension GameEngine {
             return
         }
         guard let card = discards.drawCard() else {
-            delegate?.unexpectedError(GlobalErrors.unableToDrawCard); return
+            delegate?.unexpectedError(GlobalErrors.unableToDrawCard)
+            return
         }
         
         hands[player]?.append(card)
@@ -161,13 +167,15 @@ extension GameEngine {
             return
         }
         guard (0 <= index) && (index <= 3) else {
-            delegate?.unexpectedError(GlobalErrors.invalidDiscardIndex); return
+            delegate?.unexpectedError(GlobalErrors.invalidDiscardIndex)
+            return
         }
         
         if let card = hands[player]?[index] {
             if currentKnock == nil {
                 guard card.symbol != discards.lastCard?.symbol else {
-                    delegate?.unexpectedError(GlobalErrors.invalidDiscard); return
+                    delegate?.unexpectedError(GlobalErrors.invalidDiscard)
+                    return
                 }
             }
             
@@ -207,13 +215,16 @@ extension GameEngine {
     
     func checkForValidConditions(_ player: Player, expectedCardCount: Int) -> Bool {
         guard !gameIsOver else {
-            delegate?.gameOver(lastWinningPlayer); return false
+            delegate?.gameOver(lastWinningPlayer)
+            return false
         }
         guard currentKnock != player else {
-            delegate?.unexpectedError(GlobalErrors.unableToDrawCardWhilKnocking); return false
+            delegate?.unexpectedError(GlobalErrors.unableToDrawCardWhilKnocking)
+            return false
         }
         guard hands[player]?.count == expectedCardCount else {
-            delegate?.unexpectedError(GlobalErrors.invalidNumberCards); return false
+            delegate?.unexpectedError(GlobalErrors.invalidNumberCards)
+            return false
         }
         
         return true

@@ -35,7 +35,7 @@ class CardStack {
         var displayString = ""
         
         for card in cards {
-            if 0 == displayString.characters.count {
+            if displayString.isEmpty {
                 displayString = "\(card.symbol)"
             }
             else  {

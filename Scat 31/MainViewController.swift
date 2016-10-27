@@ -119,7 +119,7 @@ extension MainViewController {
         var computerLabelText = "Computer"
         var playerLabelText = "Player"
         
-        if (gameEngine.currentDeal == .computer) {
+        if (gameEngine.currentDealer == .computer) {
             computerLabelText = "\(computerLabelText)\(GlobalStrings.currentDeal)"
         }
         else {
@@ -176,12 +176,11 @@ extension MainViewController {
     }
     
     func updateKnockStatus() {
-        //computerKnock.hidden = gameEngine.currentKnock != .computer
         if (gameEngine.currentKnock == .computer) {
-            computerKnock.text = "Knock !!!"
+            computerKnock.text = "Knocked !!!"
         }
         else {
-            computerKnock.text = "Knock @ \(gameEngine.computerKnockThreshold)"
+            computerKnock.text = "Knock threshold @ \(gameEngine.computerKnockThreshold)"
         }
         
         playerKnock.isHidden = gameEngine.currentKnock != .player
@@ -193,7 +192,7 @@ extension MainViewController {
     }
     
     func updateDiscardStatus() {
-        lastDiscardCard.text = "Last: \(gameEngine.showLastDiscard())"
+        //lastDiscardCard.text = "Last: \(gameEngine.showLastDiscard())"
         discardPile.text = gameEngine.showDiscards()
     }
 }
