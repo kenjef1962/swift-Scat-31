@@ -8,19 +8,29 @@
 
 import Foundation
 
-enum Player {
-    case computer
+enum Player: Int {
+    case computer = 0
     case player
     
-    var description: String {
+    var abbreviation: String {
+        switch self {
+        case .computer: return "C"
+        case .player: return "P"
+        }
+    }
+    
+    var symbol: String {
+        switch self {
+        case .computer: return "🖥"
+        case .player: return "👤"
+        }
+    }
+    
+    var stringValue: String {
         switch self {
         case .computer: return "Computer"
         case .player: return "Player"
         }
-    }
-    
-    var debugDescription: String {
-        return description
     }
 }
 

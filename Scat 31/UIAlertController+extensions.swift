@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 extension UIAlertController {
-    class func showAlert(_ message: String, viewController: UIViewController) {
+    class func showBasicAlert(_ message: String, viewController: UIViewController) {
         let alert = UIAlertController(title: GlobalStrings.scat31, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: GlobalStrings.ok, style: .default, handler: nil)
         

@@ -202,7 +202,7 @@ extension MainViewController: GameEngineDelegate {
     func unexpectedError(_ error: String) {
         print("\(#function) - Error: \(error)")
         
-        UIAlertController.showAlert(error, viewController: self)
+        UIAlertController.showBasicAlert(error, viewController: self)
     }
     
     func gameOver(_ player: Player?) {
@@ -213,7 +213,7 @@ extension MainViewController: GameEngineDelegate {
         if let player = player {
             let bestScore = gameEngine.getBestScore(player)
             
-            message = "\(player.description) wins with \(bestScore.symbol)"
+            message = "\(player.stringValue) wins with \(bestScore.symbol)"
             
             if bestScore.score == 31 {
                 message = "Scat diddly dat ... how about that?\n\n\(message)!!!"
@@ -233,7 +233,7 @@ extension MainViewController: GameEngineDelegate {
     func matchOver(_ player: Player) {
         print("\(#function) - Player: \(player)")
         
-        showStartNewMatchAlert("\(player.description) wins this match.\n\nLet's start a new match.")
+        showStartNewMatchAlert("\(player.stringValue) wins this match.\n\nLet's start a new match.")
         updateDisplay()
     }
     

@@ -13,10 +13,10 @@ class Deck: CardStack {
         super.clearAll()
         
         for index in 0..<52 {
-            let suit = Suit(rawValue: index / 13)
-            let face = Face(rawValue: (index % 13) + 1)
-            let card = Card(suit: suit!, face: face!)
+            guard let suit = Suit(rawValue: index / 13) else { fatalError() }
+            guard let rank = Rank(rawValue: (index % 13) + 1) else { fatalError() }
             
+            let card = Card(suit: suit, rank: rank)
             cards.append(card)
         }
     }
