@@ -14,6 +14,7 @@ class RankTests: XCTestCase {
         let rank = Rank.ace
         
         XCTAssertEqual(1, rank.rawValue)
+        XCTAssertEqual("A", rank.abbreviation)
         XCTAssertEqual("A", rank.symbol)
         XCTAssertEqual("Ace", rank.stringValue)
     }
@@ -22,6 +23,7 @@ class RankTests: XCTestCase {
         let rank = Rank.king
         
         XCTAssertEqual(13, rank.rawValue)
+        XCTAssertEqual("K", rank.abbreviation)
         XCTAssertEqual("K", rank.symbol)
         XCTAssertEqual("King", rank.stringValue)
     }
@@ -30,6 +32,7 @@ class RankTests: XCTestCase {
         let rank = Rank.queen
         
         XCTAssertEqual(12, rank.rawValue)
+        XCTAssertEqual("Q", rank.abbreviation)
         XCTAssertEqual("Q", rank.symbol)
         XCTAssertEqual("Queen", rank.stringValue)
     }
@@ -38,6 +41,7 @@ class RankTests: XCTestCase {
         let rank = Rank.jack
         
         XCTAssertEqual(11, rank.rawValue)
+        XCTAssertEqual("J", rank.abbreviation)
         XCTAssertEqual("J", rank.symbol)
         XCTAssertEqual("Jack", rank.stringValue)
     }
@@ -47,6 +51,7 @@ class RankTests: XCTestCase {
             let rank = Rank(rawValue: value)
             
             XCTAssertEqual(value, rank?.rawValue)
+            XCTAssertEqual("\(value)", rank?.abbreviation)
             XCTAssertEqual("\(value)", rank?.symbol)
             XCTAssertEqual("\(value)", rank?.stringValue)
         }

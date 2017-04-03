@@ -8,16 +8,14 @@
 
 import Foundation
 
-class Discards: CardStack {
-    var lastCard: Card?
+struct Discards: CardStackProtocol {
+    var cards = [Card]()
     
-    override func clearAll() {
-        super.clearAll()
-        lastCard = nil
+    func getAllCardsByAbbreviation() -> String {
+        return self.cards.map { return $0.abbreviation }.joined(separator: "\n")
     }
     
-    func addCard(_ card: Card) {
-        cards.insert(card, at: 0)
-        lastCard = card
+    func getAllCardsBySymbol() -> String {
+        return self.cards.map { return $0.symbol }.joined(separator: "\n")
     }
 }

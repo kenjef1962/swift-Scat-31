@@ -8,23 +8,26 @@
 
 import Foundation
 
-class Deck: CardStack {
-    func generate() {
-        super.clearAll()
+struct Deck: CardStackProtocol {
+    var cards = [Card]()
+    
+    init() {
+        reset()
+    }
+    
+    mutating func reset() {
+        emptyStack()
         
         for index in 0..<52 {
-            guard let suit = Suit(rawValue: index / 13) else { fatalError() }
-            guard let rank = Rank(rawValue: (index % 13) + 1) else { fatalError() }
-            
-            let card = Card(suit: suit, rank: rank)
-            cards.append(card)
+            if let suit = Suit(rawValue: index / 13), let rank = Rank(rawValue: (index % 13) + 1) {
+                let card = Card(suit: suit, rank: rank)
+                addToStack(card: card)
+            }
         }
     }
     
-    func shuffle() {
-        if (cards.count == 0) {
-            generate()
-        }
+    mutating func shuffle() {
+        reset()
         
         let swaps = max(cards.count, Int(arc4random_uniform(UInt32(cards.count)) * 37))
         

@@ -29,19 +29,7 @@ struct Card {
         return "\(rank.stringValue)-\(suit.stringValue)"
     }
     
-    var back: UIImage? {
-        get {
-            return UIImage(named: "CardBack")
-        }
-    }
-    
-    var face: UIImage? {
-        get {
-            return UIImage(named: abbreviation)
-        }
-    }
-    
-    var value: Int {
+    var pipValue: Int {
         get {
             switch rank {
             case .ace: return 11
@@ -50,6 +38,18 @@ struct Card {
             case .king: return 10
             default: return rank.rawValue
             }
+        }
+    }
+    
+    var backImage: UIImage? {
+        get {
+            return UIImage(named: "CardBack")
+        }
+    }
+    
+    var faceImage: UIImage? {
+        get {
+            return UIImage(named: abbreviation)
         }
     }
     

@@ -10,26 +10,31 @@ import UIKit
 
 class SettingsViewController: UIViewController {
 
+    @IBOutlet weak var animationSwitch: UISwitch!
+    @IBOutlet weak var debugModeSwitch: UISwitch!
+    @IBOutlet weak var gamesSegment: UISegmentedControl!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        navigationController?.navigationBar.makeTransparent()
+        
+        let defaults = UserDefaults.standard
+        animationSwitch.isOn = defaults.bool(forKey: "AnimationOn")
+        debugModeSwitch.isOn = defaults.bool(forKey: "DebugMode")
+        
+        let gamesPerMatch = defaults.integer(forKey: "GamesPerMatch") - 3
+        gamesSegment.selectedSegmentIndex = gamesPerMatch
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        let defaults = UserDefaults.standard
+        defaults.set(animationSwitch.isOn, forKey: "AnimationOn")
+        defaults.set(debugModeSwitch.isOn, forKey: "DebugMode")
+        
+        let gamePerMatch = gamesSegment.selectedSegmentIndex + 3
+        defaults.set(gamePerMatch, forKey: "GamesPerMatch")
     }
-    */
-
 }

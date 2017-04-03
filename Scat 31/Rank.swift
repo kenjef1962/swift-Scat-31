@@ -36,5 +36,4 @@ enum Rank: Int {
         default: return "\(rawValue)"
         }
     }
-
 }

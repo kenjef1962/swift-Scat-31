@@ -13,6 +13,7 @@ class SuitTests: XCTestCase {
     func testSuit_Clubs() {
         let suit = Suit.clubs
         
+        XCTAssertEqual("C", suit.abbreviation)
         XCTAssertEqual("♣️", suit.symbol)
         XCTAssertEqual("Clubs", suit.stringValue)
     }
@@ -20,6 +21,7 @@ class SuitTests: XCTestCase {
     func testSuit_Diamonds() {
         let suit = Suit.diamonds
         
+        XCTAssertEqual("D", suit.abbreviation)
         XCTAssertEqual("♦️", suit.symbol)
         XCTAssertEqual("Diamonds", suit.stringValue)
     }
@@ -27,6 +29,7 @@ class SuitTests: XCTestCase {
     func testSuit_Hearts() {
         let suit = Suit.hearts
         
+        XCTAssertEqual("H", suit.abbreviation)
         XCTAssertEqual("♥️", suit.symbol)
         XCTAssertEqual("Hearts", suit.stringValue)
     }
@@ -34,6 +37,7 @@ class SuitTests: XCTestCase {
     func testSuit_Spades() {
         let suit = Suit.spades
         
+        XCTAssertEqual("S", suit.abbreviation)
         XCTAssertEqual("♠️", suit.symbol)
         XCTAssertEqual("Spades", suit.stringValue)
     }

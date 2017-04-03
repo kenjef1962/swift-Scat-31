@@ -13,6 +13,7 @@ class Scat_31Tests: XCTestCase {
     func testPlayer_Computer() {
         let player = Player.computer
         
+        XCTAssertEqual("C", player.abbreviation)
         XCTAssertEqual("🖥", player.symbol)
         XCTAssertEqual("Computer", player.stringValue)
     }
@@ -20,6 +21,7 @@ class Scat_31Tests: XCTestCase {
     func testPlayer_Player() {
         let player = Player.player
 
+        XCTAssertEqual("P", player.abbreviation)
         XCTAssertEqual("👤", player.symbol)
         XCTAssertEqual("Player", player.stringValue)
     }

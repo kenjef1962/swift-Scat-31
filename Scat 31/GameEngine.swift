@@ -36,7 +36,7 @@ protocol GameEngineDelegate {
 }
 
 // MARK: Properties
-class GameEngine {
+final class GameEngine {
     // MARK: Private Properties
     fileprivate var deck = Deck()
     fileprivate var discards = Discards()
@@ -47,7 +47,9 @@ class GameEngine {
     fileprivate var lastWinningPlayer: Player?
     
     fileprivate var timer: Timer?
-    fileprivate var timerDuration = 0.5
+    fileprivate var timerDuration = 1.0
+    
+    fileprivate var computerKnockThreshold = 0.0
     
     // MARK: Public Properties
     var delegate: GameEngineDelegate?
@@ -56,16 +58,20 @@ class GameEngine {
     var currentTurn = Player.computer
     var currentKnock: Player?
     
-    var computerKnockThreshold = 0.0
-    
     // MARK: Public Computed Properties
     var winsComputer: Int { get { return wins[.computer] ?? 0 } }
     var winsPlayer: Int { get { return wins[.player] ?? 0 } }
     
-    var canPlayerDiscard: Bool { get { return 4 == hands[.player]?.count } }
-    var canPlayerKnock: Bool { get { return (currentKnock != nil) || (currentTurn != .player) || (hands[.player]?.count == 4) } }
+    var handComputer: [Card]? { get { return hands[.computer] } }
+    var handPlayer: [Card]? { get { return hands[.player] } }
     
-    var deckCardCount: Int { get { return deck.cardCount } }
+    var canPlayerDiscard: Bool { get { return 4 == hands[.player]?.count } }
+    var canPlayerKnock: Bool { get { return (currentKnock == nil) && (currentTurn == .player) && (hands[.player]?.count == 3) } }
+    
+    var deckCardCount: Int { get { return deck.count } }
+    var discardsCardCount: Int { get { return discards.count } }
+    
+    var computerThreshold: Double { get { return computerKnockThreshold } }
 }
 
 // MARK: Start Games & Matches
@@ -85,8 +91,8 @@ extension GameEngine {
         
         computerKnockThreshold = 26.0 + Double(arc4random_uniform(5))
         
+        discards.emptyStack()
         deck.shuffle()
-        discards.clearAll()
         
         dealCards()
         
@@ -106,11 +112,11 @@ extension GameEngine {
         clearHands()
         
         for _ in 1...3 {
-            guard let card1 = deck.drawCard() else {
+            guard let card1 = deck.drawFromStack() else {
                 delegate?.unexpectedError(GlobalErrors.unableToDrawCard)
                 return
             }
-            guard let card2 = deck.drawCard() else {
+            guard let card2 = deck.drawFromStack() else {
                 delegate?.unexpectedError(GlobalErrors.unableToDrawCard)
                 return
             }
@@ -126,11 +132,11 @@ extension GameEngine {
         drawCard(currentTurn)
     }
     
-    func drawCard(_ player: Player) {
+    fileprivate func drawCard(_ player: Player) {
         guard checkForValidConditions(player, expectedCardCount: 3) else {
             return
         }
-        guard let card = deck.drawCard() else {
+        guard let card = deck.drawFromStack() else {
             delegate?.unexpectedError(GlobalErrors.unableToDrawCard)
             return
         }
@@ -144,11 +150,11 @@ extension GameEngine {
         drawDiscard(currentTurn)
     }
 
-    func drawDiscard(_ player: Player) {
+    fileprivate func drawDiscard(_ player: Player) {
         guard checkForValidConditions(player, expectedCardCount: 3) else {
             return
         }
-        guard let card = discards.drawCard() else {
+        guard let card = discards.drawFromStack() else {
             delegate?.unexpectedError(GlobalErrors.unableToDrawCard)
             return
         }
@@ -162,7 +168,7 @@ extension GameEngine {
         discardCard(currentTurn, index: index)
     }
     
-    func discardCard(_ player: Player, index: Int) {
+    fileprivate func discardCard(_ player: Player, index: Int) {
         guard checkForValidConditions(player, expectedCardCount: 4) else {
             return
         }
@@ -173,14 +179,14 @@ extension GameEngine {
         
         if let card = hands[player]?[index] {
             if currentKnock == nil {
-                guard card.symbol != discards.lastCard?.symbol else {
+                guard card.symbol != discards.getTopCardBySymbol() else {
                     delegate?.unexpectedError(GlobalErrors.invalidDiscard)
                     return
                 }
             }
             
             hands[player]?.remove(at: index)
-            discards.addCard(card)
+            discards.addToStack(card: card)
         }
         
         currentTurn = (player == .computer) ? .player : .computer
@@ -198,7 +204,7 @@ extension GameEngine {
         knock(currentTurn)
     }
     
-    func knock(_ player: Player) {
+    fileprivate func knock(_ player: Player) {
         guard checkForValidConditions(player, expectedCardCount: 3) else {
             return
         }
@@ -258,10 +264,10 @@ extension GameEngine {
     
     fileprivate func computerShouldDrawDiscard() -> Bool {
         // Determine if we draw or pick up discard
-        if (discards.cardCount == 0) {
+        if (discards.count == 0) {
             return false
         }
-        else if (discards.topCard?.value < 5) {
+        else if (discards.topCard?.pipValue < 5) {
             return false
         }
         else if let topCard = discards.topCard {
@@ -282,13 +288,13 @@ extension GameEngine {
     @objc func computerDraw(_ timer: Timer) {
         drawCard()
         
-        self.timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(computerDiscards(_:)), userInfo: "", repeats: false)
+        self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(computerDiscards(_:)), userInfo: "", repeats: false)
     }
     
     @objc func computerDrawDiscard(_ timer: Timer) {
         drawDiscard()
         
-        self.timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(computerDiscards(_:)), userInfo: "", repeats: false)
+        self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(computerDiscards(_:)), userInfo: "", repeats: false)
     }
     
     @objc func computerDiscards(_ timer: Timer) {
@@ -297,9 +303,9 @@ extension GameEngine {
         if let cards = hands[.computer] {
             let bestScore = getBestScore(.computer)
             
-            for card in cards {
-                if (card.suit != bestScore.suit) {
-                    possibleDiscards.append(card)
+            cards.forEach() {
+                if ($0.suit != bestScore.suit) {
+                    possibleDiscards.append($0)
                 }
             }
             
@@ -308,14 +314,15 @@ extension GameEngine {
             }
             
             var smallestCard: Card? = nil
-            for card2 in possibleDiscards {
-                if ((smallestCard == nil) || (card2.value < smallestCard?.value)) {
-                    smallestCard = card2
+            
+            possibleDiscards.forEach() {
+                if ((smallestCard == nil) || ($0.pipValue < smallestCard?.pipValue)) {
+                    smallestCard = $0
                 }
             }
             
             let index = cards.index() {
-                return ($0.suit == smallestCard!.suit) && ($0.value == smallestCard!.value)
+                return ($0.suit == smallestCard!.suit) && ($0.pipValue == smallestCard!.pipValue)
             }
             
             discardCard(index!)
@@ -331,10 +338,7 @@ extension GameEngine {
         
         if let handToScore = hands[player] {
             var scores = [0, 0, 0, 0]
-            
-            for card in handToScore {
-                scores[card.suit.rawValue] += card.value
-            }
+            handToScore.forEach() { scores[$0.suit.rawValue] += $0.pipValue }
             
             for index in 0..<scores.count {
                 if (bestScore < scores[index]) {
@@ -346,7 +350,7 @@ extension GameEngine {
         
         let suit = Suit(rawValue: indexSuit)!
         
-        return (score: bestScore, suit: suit, symbol: "\(bestScore)\(suit.symbol)")
+        return (score: bestScore, suit: suit, symbol: "\(bestScore)-\(suit.symbol)")
     }
     
     func checkForWinner(_ player: Player) -> Bool {
@@ -390,7 +394,10 @@ extension GameEngine {
             let winsPlayer = wins[winner] ?? 0
             wins[winner] = winsPlayer + 1
             
-            if (5 == wins[winner]) {
+            let defaults = UserDefaults.standard
+            let gamesPerMatch = defaults.integer(forKey: "GamesPerMatch")
+            
+            if (gamesPerMatch == wins[winner]) {
                 delegate?.matchOver(winner)
                 return
             }
@@ -412,23 +419,19 @@ extension GameEngine {
         wins[.player]? = 0
     }
     
-    func getHand(_ player: Player) -> [Card]? {
-        return hands[player]
+    func getDiscardsByAbbreviation() -> String {
+        return discards.getAllCardsByAbbreviation()
     }
     
-    func showDeck() -> String {
-        return deck.showCards()
+    func getDiscardsBySymbol() -> String {
+        return discards.getAllCardsBySymbol()
     }
     
-    func showDiscards() -> String {
-        return discards.showCards()
+    func getLastDiscardByAbbreviation() -> String {
+        return discards.getTopCardByAbbreviation() ?? ""
     }
     
-    func showTopDiscard() -> String {
-        return discards.topCard?.symbol ?? "---"
-    }
-    
-    func showLastDiscard() -> String {
-        return discards.lastCard?.symbol ?? "---"
+    func getLastDiscardBySymbol() -> String {
+        return discards.getTopCardBySymbol() ?? ""
     }
 }
